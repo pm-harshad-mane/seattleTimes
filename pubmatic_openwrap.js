@@ -19,7 +19,7 @@ PWT.jsLoaded = function(){ //PubMatic pwt.js on load callback is used to load GP
   })();
 };
 
-///*
+/*
 (function() {
   var purl = window.location.href;
   var url = '//ads.pubmatic.com/AdServer/js/pwt/156708/981';
