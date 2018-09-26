@@ -1,4 +1,4 @@
-///*
+/*
 if (typeof mth === 'undefined') {
     mth = [];
 }
