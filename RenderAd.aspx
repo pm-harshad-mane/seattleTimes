@@ -1,3 +1,4 @@
+///*
 if (typeof mth === 'undefined') {
     mth = [];
 }
@@ -29,3 +30,4 @@ if (document.addEventListener) {
         }
     });
 }
+//*/
