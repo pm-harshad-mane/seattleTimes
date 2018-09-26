@@ -2237,22 +2237,27 @@
                 var currentPositions = window.SEATIMESCO.ads.currentPositions;
                 var a9Slots = self.getAmazonHeaderBiddingConfig(amazonHeaderBiddingConfig, currentPositions, browserWidth);
                 var a9SlotIds = [];
+                var notifyId;
                 window.apstag.fetchBids({
                     slots: a9Slots,
                     timeout: headerBiddingTimeout,
                 }, function() {
                     self.amazonAdCallback(slotsOnPage);
+                    window.OWT.notifyExternalBiddingComplete(notifyId);
                 });
+                
                 for (var i = 0; i < a9Slots.length; i++) {
                     a9SlotIds.push(a9Slots[i].slotID);
                 }
                 // Notifies OpenWrap that there are some external bidders for which it has to wait before calling DFP.
                 notifyId = window.OWT.registerExternalBidders(a9SlotIds);
-                setTimeout(function() {
-                    // Ensuring we send the signal to Open Wrap to proceed in the case of a timeout.
-                    // This will tell Pubmatic OpenWrap that all the external bidders have returned and openwrap may now proceed bid.
-                    window.OWT.notifyExternalBiddingComplete(notifyId);
-                }, headerBiddingTimeout);
+
+                // commenting this block as it is handled by OpenWrap internally
+                // setTimeout(function() {
+                //     // Ensuring we send the signal to Open Wrap to proceed in the case of a timeout.
+                //     // This will tell Pubmatic OpenWrap that all the external bidders have returned and openwrap may now proceed bid.
+                //     window.OWT.notifyExternalBiddingComplete(notifyId);
+                // }, headerBiddingTimeout);
             },
             /**
              * Set targeting for Amazon Header Bidding, and if all header bidding is completed, trigger the ad server request
@@ -2311,7 +2316,8 @@
                     headerBiddingCompleted = true;
                 } else if ((typeof pbjs === 'undefined') && (!openXActive && hasAmazonHBCompleted)) { // Need this check for PubmaticOpenWrap, Could add some checks if only openX is enabled, likely not worth it.
                     headerBiddingCompleted = true;
-                    window.OWT.notifyExternalBiddingComplete(notifyId);
+                    // window.OWT.notifyExternalBiddingComplete(notifyId);
+                    // commenting as it is not required
                 }
                 return headerBiddingCompleted;
             },
