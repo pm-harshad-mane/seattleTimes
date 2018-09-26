@@ -1811,9 +1811,9 @@
                 googletag.pubads().enableSingleRequest();
                 googletag.pubads().enableAsyncRendering();
                 googletag.pubads().collapseEmptyDivs();
-                if (!this.isHBVendorActive('PubmaticOpenWrap')) {
+                //if (!this.isHBVendorActive('PubmaticOpenWrap')) {
                     googletag.pubads().disableInitialLoad();
-                }
+                //}
                 googletag.enableServices();
                 if (SEATIMESCO.performance.browserSupportsPerformance()) {
                     SEATIMESCO.performance.addMark('adsStarted', 'advertising');
